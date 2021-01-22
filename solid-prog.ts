@@ -23,9 +23,14 @@ class AuthenticateUser implements iValidate {
 }
 
 class EmailValidation implements iValidate {
-    
+    public regexPattern: string;
+
+    constructor() {
+        this.regexPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    }
+
     validate(data: iUser): boolean {
-        const regex =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;        
+        const regex = this.regexPattern;
         if (data.email.match(regex)) return true;
 
         return false;
